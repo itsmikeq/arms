@@ -1,3 +1,8 @@
 = Arms
 
+
+Adds mutiple database support to activerecord.
+
+Still under development
+
 This project rocks and uses MIT-LICENSE.
