@@ -1,8 +1,10 @@
 Description:
-    Explain the generator
+    Creates data sources and models/migrations that inherit correctly
 
 Example:
     rails generate datasource Thing
 
     This will create:
         lib/thing.rb
+
+

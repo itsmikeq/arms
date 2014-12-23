@@ -5,5 +5,9 @@ require 'active_support/all'
 require 'active_record'
 module Arms
   class DataSourceNotFoundError < StandardError ; end
-
+  autoload :Arms, 'Arms'
+  Dir.glob("../../generators/arms/*.rb").each do |f|
+    puts "Requiring #{f}"
+    require f
+  end
 end

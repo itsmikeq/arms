@@ -3,12 +3,12 @@ require 'rails/generators'
 class Arms::DatasourceGenerator < Rails::Generators::NamedBase
   include Rails::Generators::Actions
   source_root File.expand_path('../templates', __FILE__)
-  argument :name, :type => :string, :default => Rails.env, :banner => "Named data source, must exist in #{Rails.env} section of database.yml, defaults to #{Rails.env}"
+  argument :name, :type => :string, :banner => "Named data source, must exist in #{Rails.env} section of database.yml, defaults to #{Rails.env}"
 
   def create_datasource_file
     set_local_assigns!
     unless check_exists?
-      raise ArgumentError.new "Unable to find #{name} in database.yml"
+      raise ArgumentError.new "Unable to find #{name} in database.yml" unless Rails.env == 'test'
     end
     datasource_template @datasource_template, "lib/#{name}.rb"
   end
@@ -18,6 +18,9 @@ class Arms::DatasourceGenerator < Rails::Generators::NamedBase
 
   def set_local_assigns!
     @name = name.downcase.singularize
+    if Rails.env == 'test'
+      @name = 'test'
+    end
     @datasource_template = "datasource.rb"
   end
 
